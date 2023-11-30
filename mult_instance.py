@@ -123,7 +123,7 @@ def getinfo(driver, link):
                 # print(f'pAway:{pAway*100:.2f} jogos:{totalAway} jogosComGolHT:{golshtAway} média:{mediaGolsHTAway:.2f} gols:{gols}')
             # print()       
     except:
-        print(f'\nExcept: {Home} x {Away} - {link}')
+        #print(f'\nExcept: {Home} x {Away} - {link}')
         pass
 
     # print(Date,Time,Country,League,Home,Away,Odds_H,Odds_D,Odds_A) 
@@ -173,10 +173,8 @@ if __name__ == '__main__':
     wd_chrome1 = webdriver.Chrome(options=options)
     wd_chrome2 = webdriver.Chrome(options=options)
     wd_chrome3 = webdriver.Chrome(options=options)
-    wd_chrome4 = webdriver.Chrome(options=options)
-    wd_chrome5 = webdriver.Chrome(options=options)
-    wd_chrome6 = webdriver.Chrome(options=options)
-    drivers = [wd_chrome1, wd_chrome2, wd_chrome3, wd_chrome4, wd_chrome5, wd_chrome6]
+   
+    drivers = [wd_chrome1, wd_chrome2, wd_chrome3]
 
 
     # Criação do WebDriver do Chrome
@@ -216,17 +214,17 @@ if __name__ == '__main__':
     # Exemplo de ID de um jogo: 'g_1_Gb7buXVt'    
     id_jogos = [i[4:] for i in id_jogos]
 
-    # Limitar o tamanho da análise
-    #lim = 10
-    #if(len(id_jogos)>lim):
-        #id_jogos = id_jogos[:lim]
+    #Limitar o tamanho da análise
+    # lim = 5
+    # if(len(id_jogos)>lim):
+    #     id_jogos = id_jogos[:lim]
 
-    # Exibir a quantidade de jogos coletados
+    #Exibir a quantidade de jogos coletados
     print(f'Jogos: {len(id_jogos)}')
 
     # Teste com múltiplas instâncias 
     futures = []
-    with ThreadPoolExecutor(max_workers=6) as ex:
+    with ThreadPoolExecutor(max_workers=3) as ex:
         zip_list = zip(id_jogos, cycle(drivers)) if len(id_jogos) > len(drivers) else zip(cycle(id_jogos), drivers)
         for par in zip_list:
             try:
